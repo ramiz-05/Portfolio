@@ -4,7 +4,6 @@ const contactForm = document.getElementById('contact-form');
 const formFeedback = document.getElementById('form-feedback');
 const skillCards = document.querySelectorAll('.skill-card');
 
-
 themeToggleBtn.addEventListener('click', () => {
     const isLightMode = bodyElement.classList.toggle('light-theme');
 
@@ -21,8 +20,7 @@ skillCards.forEach((card) => {
     });
 });
 
-
-contactForm.addEventListener("submit", function (event) {
+contactForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const name = document.getElementById("name").value.trim();
@@ -33,26 +31,24 @@ contactForm.addEventListener("submit", function (event) {
         return;
     }
 
-   
-    const subject = encodeURIComponent("Portfolio Contact — " + name);
-    const body = encodeURIComponent(
-        "Name: " + name +
-        "\nEmail: " + email +
-        "\n\nMessage:\n" + message
-    );
+    const formData = new FormData(contactForm);
 
-    
-    const mailtoLink =
-        "mailto:ramizaboramadan2@gmail.com" +
-        "?subject=" + subject +
-        "&body=" + body;
+    try {
+        const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
 
-    
-    formFeedback.textContent = `Thank you, ${name} `;
-
-  
-    window.location.href = mailtoLink;
-
-   
-    contactForm.reset();
+        if (response.ok) {
+            formFeedback.textContent = `Thank you, ${name}! Your message has been sent successfully.`;
+            contactForm.reset();
+        } else {
+            formFeedback.textContent = "Oops! There was a problem submitting your form.";
+        }
+    } catch (error) {
+        formFeedback.textContent = "Oops! There was a network error. Please try again.";
+    }
 });
