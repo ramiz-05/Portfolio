@@ -803,3 +803,88 @@ html[dir="rtl"] .skills-grid:has(.skill-card.active-plan) .skill-card:not(.activ
         grid-row: auto;
     }
 }
+/* =========================================
+   9. MOBILE RESPONSIVE (Phones & Tablets)
+   ========================================= */
+@media (max-width: 768px) {
+    .site-header {
+        top: 10px;
+        padding: 0 0.6rem;
+    }
+
+    .nav-container {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.65rem 1rem;
+        gap: 0.5rem;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+        white-space: nowrap;
+    }
+
+    /* إخفاء روابط التنقل في وضع الهاتف لعدم حجب المحتوى */
+    .navbar {
+        display: none;
+    }
+
+    .header-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-inline-start: auto;
+    }
+
+    .theme-btn,
+    .lang-btn {
+        padding: 0.35rem 0.7rem;
+        font-size: 0.78rem;
+        white-space: nowrap;
+    }
+
+    .about-content {
+        flex-direction: column-reverse;
+        text-align: center;
+        padding-top: 2rem;
+    }
+
+    .actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .about-image {
+        min-height: 310px;
+    }
+
+    .profile-pic {
+        width: 220px;
+        height: 220px;
+    }
+
+    .about-image::before {
+        width: 260px;
+        height: 260px;
+    }
+
+    .about-image::after {
+        width: 295px;
+        height: 295px;
+    }
+
+    .skills-grid.plan-open,
+    .skills-grid:has(.skill-card.active-plan) {
+        grid-template-columns: 1fr;
+    }
+
+    .skills-grid.plan-open .skill-card:not(.active-plan),
+    .skills-grid:has(.skill-card.active-plan) .skill-card:not(.active-plan),
+    .skills-grid.plan-open .skill-card.active-plan,
+    .skills-grid:has(.skill-card.active-plan) .skill-card.active-plan {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
